@@ -70,16 +70,17 @@ class Manager(Employee):
 ############################################################
 class Temporary_Employee(Employee):
     def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.__hours = kwargs.get("hours")
+        super().__init__() #add variable
+        self.hours=kwargs[hours]
 
     def cal_salary(self):
-        return self.__salary * self.__hours
-
+        return self.salary*self.hours
 
     def __str__(self):
-        self.__name + "'s salary is " + str(self.cal_salary())
-
+        print("Temporary_Employee")
+        for var in kwargs:
+            print(var,",", end="")
+        print("")
 
 
 ############################################################
@@ -88,40 +89,33 @@ class Temporary_Employee(Employee):
 
 
 class Consultant(Temporary_Employee):
-    
-    def __init__(self, **kwargs):
-        super().__init__(**kwargs)
-        self.__travel = kwargs.get("travel")
-        
-
-
     def cal_salary(self):
-        return super().cal_salary() + 1000 * self.__travel
-    
+        return super().cal_salary()+(1000*kwargs[travel])
+
     def __str__(self):
-        self.__name + "'s salary is " + str(self.cal_salary())
-
-
-    
+        print("Consultant")
+        for var in kwargs:
+            print(var,",", end="")
+        print("")
 
 ############################################################
 ############################################################
 ############################################################
 
 
-class Consultant_Manager(Manager, Consultant):
+class Consultant_Manager(Consultant, Manager):
     def __init__(self,  **kwargs):
-        super().__init__(**kwargs)
-        Consultant().__init__(self, **kwargs)
-
+        Consultant.__init__() #add variable
+        Manager.__init__()
 
     def cal_salary(self):
-        return Consultant().cal_salary(self) + self.__bonus
-        
-
+        return super().cal_salary()+kwargs[bonus]
+    
     def __str__(self):
-        self.__name + "'s salary is " + str(self.cal_salary())
-
+        print("Consultant_Manager")
+        for var in kwargs:
+            print(var,",", end="")
+        print("")
 
 
 ############################################################
